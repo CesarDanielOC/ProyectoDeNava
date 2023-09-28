@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Banco Polloyon - Tu Socio Financiero de Confianza</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Fondo gris claro */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #menu-container {
+            display: flex;
+        }
+        #menu {
+            background-color: #003A6E; /* Cambiar el color del menú a un azul oscuro */
+            color: beige;
+            width: 250px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            transition: left 0.3s;
+            overflow-x: hidden;
+            z-index: 2; /* Establecer un z-index para el menú */
+        }
+        #menu.open {
+            left: 0;
+        }
+        #menuToggle {
+            background-image: url('LOGOBF.PNG'); z-index: 3; /* Cambiar el fondo del botón a la imagen PNG personalizada */
+            background-size: cover;
+            background-position: -1px center; /* Mover la imagen hacia la derecha */
+            width: 40px; /* Ancho del botón */
+            height: 40px; /* Altura del botón */
+            cursor: pointer;
+            z-index: 4; /* Asegurar que el botón esté por encima del menú cuando esté abierto */
+            transition: background-color #003A6E 0.3s, left 0.3s;
+            border-top: 3px solid #003A6E;
+            border-bottom: 3px solid #003A6E;
+            border-left: 3px #003A6E;
+            border-right: 3px #003A6E;
+            position: relative;
+        }
+        #menuToggle:hover {
+            background-color: #002350; /* Cambio de color al pasar el mouse */
+            color: #f0f0f0;
+        }
+        #menuToggle.open {
+            background-color: #003A6E; /* Cambio de color al abrir el menú */
+            color: beige;
+        }
+        #menuToggle.sticky {
+            position: sticky;
+            top: 20px; /* Ajusta la distancia desde la parte superior de la pantalla */
+            z-index: 100; /* Asegura que el botón esté por encima de otros elementos */
+        }
+        #menuToggle.open + #menu {
+            width: 250px; /* Ancho del menú al abrir el menú */
+        }
+        /* Cambiar el encabezado a un div */
+        #header {
+            background-color: #003A6E; /* Cambiar el color del encabezado a un azul oscuro */
+            color: #FFD100; /* Cambiar el color del texto a amarillo */
+            padding: 100px 0 60px; /* Ajuste del espacio superior e inferior del encabezado */
+            text-align: center;
+            position: relative; /* Permite superponer el fondo de la imagen */
+        }
+        #header::before {
+            content: "";
+            background-image: url('FondoE.png'); /* Ruta de la imagen del encabezado */
+            background-size: cover;
+            background-position: center center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.5; /* Ajusta la opacidad de la imagen */
+            z-index: -1;
+        }
+        main {
+            margin-left: 0;
+            padding: 20px;
+        }
+        #menu ul {
+            margin-top: 60px;
+            padding-left: 0;
+            list-style: none;
+        }
+        #menu ul li {
+            margin-bottom: 10px;
+        }
+        #menu ul li a {
+            color: beige;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #menu ul li a:hover {
+            background-color: #002350;
+        }
+        /* Estilos para el div encima del encabezado */
+        #header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background-image: url('FondoE.png'); /* Ruta de la imagen a mostrar en el div */
+            background-size: cover;
+            background-position: center;
+            z-index: 1; /* Asegurar que el div esté por encima del encabezado y debajo del botón */
+        }
+        /* Estilos para las opciones de menú en el encabezado */
+        #menu-in-header a {
+            color: beige;
+            text-decoration: none;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 0 10px; /* Espaciado entre las opciones de menú */
+        }
+        #menu-in-header a:hover {
+            background-color: #002350;
+        }
+        /* Estilos para el lado derecho con espacio para imágenes */
+        #right-side {
+            float: right;
+            width: 50%;
+            padding: 20px;
+        }
+        #right-side p {
+            margin-bottom: 20px;
+        }
+        .image {
+            width: 100%;
+            max-width: 400px;
+            display: block;
+            margin: 0 auto;
+        }
+        /* Estilos para la sección de monedas */
+        #coins-section {
+            clear: both;
+            padding: 20px;
+        }
+        .coin-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        /* Estilos para las secciones interactivas */
+        .interactive-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .interactive-section:hover {
+            transform: scale(1.05); /* Aumentar el tamaño al pasar el cursor */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra al pasar el cursor */
+        }
+        .section-content {
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            flex-grow: 1;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="menu-container">
+        <div id="menuToggle"></div> <div id="menu">
+            <ul>
+                <a href="index.html">Inicio/a><br><br>
+        <a href="Vision.html">Acerca de Nosotros</a><br><br>
+        <a href="Mision.html">Nuestros Servicios</a><br><br>
+        <a href="webmaster.html">Contacto</a>
+            </ul>
+        </div>
+    </div>
+     <div id="header">
+        <h1>Banco Polloyon</h1><p>Tu Socio Financiero de Confianza</p>
+         <div id="menu-in-header">
+            <a href="index.html">Inicio</a>
+        <a href="Vision.html">Acerca de Nosotros</a>
+        <a href="Mision.html">Nuestros Servicios</a>
+        <a href="webmaster.html">Contacto</a>
+        </div>
+    </div>
+    <div id="header-overlay"></div> 
+    <main>
+      
+        <div id="right-side">
+            <h2>La mente maestra detrás de todo esto.</h2>
+
+                <p>Nada de esto sería posible sin el fundador y programador de la página quien con sus ahorros y esfuerzo de tiempo completo fue capáz de conseguir acabar el proyecto en un lapso de 2 días aproximadamente.</p>
+                
+                <h3>Gracias por el apoyo</h3>
+                
+            <p>Aunque el esfuerzo es importante, esto no habría funcionado sin la ayuda de miles de personas que confiaron en el Banco mas perrón, El Banco Polloyón</p></div>
+
+        <img src="Bankopoyo.png" alt="banko poyoyon">
+         <div id="coins-section">
+            <div class="coin-box">
+                <center><h2>Contactos director</h2></center>
+                
+            
+            <div class="coin-box">
+                <h3>Facebook personal</h3>
+                <p>Pedrito Mancinas </p>
+            </div>
+            <div class="coin-box">
+                <h3>Numero de Telefono</h3>
+                <p>+52 656 723 8912</p>
+            </div>
+         
+        </div>
+        
+   
+    </main>        
+
+   
+    <div id="footer"><center>
+   
+        <a href="index.html">Inicio</a>
+        <a href="Vision.html">Acerca de Nosotros</a>
+        <a href="Mision.html">Nuestros Servicios</a>
+        <a href="webmaster.html">Contacto</a>
+        <p>Derechos Reservados del Banco Polloyon &copy; 2023</p>
+    </center>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const menu = document.getElementById("menu");
+
+        menuToggle.addEventListener("click", () => {
+            menu.classList.toggle("open");
+        });
+
+        window.addEventListener("scroll", () => {
+            const scrollPosition = window.scrollY;
+
+            if (scrollPosition > 100) {
+                menuToggle.classList.add("sticky");
+            } else {
+                menuToggle.classList.remove("sticky");
+            }
+        });
+    </script>
+</body>
+</html>

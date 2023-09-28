@@ -1,0 +1,11 @@
+.image-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100%; /* Asegura que el contenedor ocupe toda la altura de la sección */
+}
+
+.centered-image {
+    max-width: 100%; /* Ajustar el ancho máximo de la imagen */
+    max-height: 100%; /* Ajustar la altura máxima de la imagen */
+}
